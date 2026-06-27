@@ -3,512 +3,470 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#080808">
-<title>Velora Coffee</title>
+<title>VELORA — Menü</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#080808;--bg2:#101010;--bg3:#161616;--bg4:#1e1e1e;--bg5:#252525;
+  --accent:#C8A96E;--accent2:#E2C48A;--accent3:#8B6B3D;
+  --accent-bg:rgba(200,169,110,0.10);--accent-bd:rgba(200,169,110,0.22);
+  --text:#F2EDE4;--text2:#9A8878;--text3:#5A4E46;
+  --green:#4CAF7A;--green-bg:rgba(76,175,122,0.12);
+  --border:1px solid #1e1e1e;--border2:1px solid #282828;
+  --r-sm:8px;--r:12px;--r-lg:18px;--r-xl:24px;
+  --t:0.18s cubic-bezier(0.4,0,0.2,1);
+}
+html,body{width:100%;min-height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;-webkit-font-smoothing:antialiased;scrollbar-width:thin;scrollbar-color:var(--bg4) transparent;}
+*{-webkit-tap-highlight-color:transparent;}
+button{touch-action:manipulation;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:4px;}
+
+/* LANDING */
+#landing{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:40px 20px;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.orb1{width:420px;height:420px;background:radial-gradient(circle,rgba(200,169,110,0.18) 0%,transparent 70%);top:-100px;left:-100px;animation:orbFloat 8s ease-in-out infinite alternate;}
+.orb2{width:320px;height:320px;background:radial-gradient(circle,rgba(200,169,110,0.10) 0%,transparent 70%);bottom:-80px;right:-60px;animation:orbFloat 11s ease-in-out infinite alternate-reverse;}
+@keyframes orbFloat{from{transform:translate(0,0) scale(1);}to{transform:translate(30px,20px) scale(1.06);}}
+
+.landing-logo{width:72px;height:72px;background:linear-gradient(135deg,var(--accent),var(--accent3));border-radius:22px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#0a0a0a;margin-bottom:24px;box-shadow:0 12px 40px rgba(200,169,110,0.25);}
+.landing-title{font-family:'Syne',sans-serif;font-size:clamp(42px,9vw,80px);font-weight:800;letter-spacing:-2px;line-height:1;text-align:center;margin-bottom:10px;}
+.landing-sub{font-size:14px;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-bottom:48px;}
+.open-btn{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#0a0a0a;border:none;padding:16px 44px;border-radius:100px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:transform var(--t),box-shadow var(--t);box-shadow:0 8px 32px rgba(200,169,110,0.30);}
+.open-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(200,169,110,0.40);}
+.open-btn:active{transform:translateY(0);}
+.landing-tag{margin-top:28px;font-size:12px;color:var(--text3);letter-spacing:0.5px;}
+
+/* LANDING ACTIONS (3 options) */
+.landing-actions{display:flex;flex-direction:column;gap:14px;width:100%;max-width:320px;position:relative;z-index:1;}
+.action-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;border-radius:100px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:transform var(--t),box-shadow var(--t),border-color var(--t),color var(--t);text-decoration:none;border:none;}
+.action-btn svg{width:18px;height:18px;flex-shrink:0;}
+.action-btn:active{transform:translateY(0) scale(0.98);}
+.action-menu{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#0a0a0a;box-shadow:0 8px 32px rgba(200,169,110,0.30);}
+.action-menu:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(200,169,110,0.40);}
+.action-social{background:var(--bg3);border:var(--border2);color:var(--text);}
+.action-instagram:hover{transform:translateY(-2px);border-color:#E1306C;color:#E1306C;}
+.action-facebook:hover{transform:translateY(-2px);border-color:#1877F2;color:#1877F2;}
+
+/* TRANSITIONS */
+@keyframes landingExit{to{opacity:0;transform:scale(0.96) translateY(-20px);}}
+@keyframes menuEnter{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+#landing.exit{animation:landingExit 0.45s cubic-bezier(0.4,0,0.2,1) forwards;}
+#menu-page{display:none;flex-direction:column;min-height:100vh;}
+#menu-page.visible{display:flex;animation:menuEnter 0.45s cubic-bezier(0.4,0,0.2,1) forwards;}
+
+/* HEADER */
+.menu-header{position:sticky;top:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:var(--border);padding:0 20px;}
+.header-top{display:flex;align-items:center;justify-content:space-between;height:60px;}
+.header-logo{display:flex;align-items:center;gap:10px;}
+.header-badge{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),var(--accent3));border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:#0a0a0a;}
+.header-biz{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.3px;}
+.back-btn{display:flex;align-items:center;gap:6px;background:var(--bg3);border:var(--border2);color:var(--text2);padding:7px 14px;border-radius:100px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:color var(--t),border-color var(--t);}
+.back-btn:hover{color:var(--text);border-color:var(--bg5);}
+.back-btn svg{width:14px;height:14px;}
+.header-right{display:flex;align-items:center;gap:12px;}
+.cloud-ind{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3);}
+.cloud-dot{width:6px;height:6px;border-radius:50%;background:var(--text3);}
+.cloud-dot.live{background:var(--green);box-shadow:0 0 0 3px var(--green-bg);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--green-bg);}50%{box-shadow:0 0 0 5px transparent;}}
+
+/* SEARCH */
+.search-wrap{padding:10px 0 12px;}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--bg3);border:var(--border2);border-radius:var(--r);padding:10px 14px;}
+.search-box svg{width:15px;height:15px;color:var(--text3);flex-shrink:0;}
+.search-box input{background:none;border:none;outline:none;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;width:100%;}
+.search-box input::placeholder{color:var(--text3);}
+
+/* CAT BAR */
+.cat-bar{display:flex;gap:6px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none;}
+.cat-bar::-webkit-scrollbar{display:none;}
+.cat-pill{flex-shrink:0;background:var(--bg3);border:var(--border2);color:var(--text2);padding:7px 16px;border-radius:100px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:all var(--t);white-space:nowrap;}
+.cat-pill.active{background:var(--accent-bg);border-color:var(--accent-bd);color:var(--accent);}
+.cat-pill:hover:not(.active){color:var(--text);}
+
+/* BODY */
+.menu-body{flex:1;max-width:900px;width:100%;margin:0 auto;padding:24px 20px 60px;}
+
+/* SECTION */
+.cat-section{margin-bottom:36px;}
+.cat-title{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--accent-bd);display:flex;align-items:center;gap:8px;}
+.cat-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--accent-bd),transparent);}
+
+/* PRODUCT GRID */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.product-card{background:var(--bg2);border:var(--border);border-radius:var(--r-lg);padding:18px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:border-color var(--t),transform var(--t),background var(--t);position:relative;overflow:hidden;}
+.product-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent-bg) 0%,transparent 60%);opacity:0;transition:opacity var(--t);}
+.product-card:hover{border-color:var(--accent-bd);transform:translateY(-2px);}
+.product-card:hover::before{opacity:1;}
+.product-card:active{transform:translateY(0);}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+.card-emoji{width:44px;height:44px;background:var(--bg3);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.card-info{flex:1;min-width:0;}
+.card-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;line-height:1.3;color:var(--text);margin-bottom:3px;}
+.card-desc{font-size:12px;color:var(--text2);line-height:1.5;}
+.card-footer{display:flex;align-items:center;justify-content:space-between;}
+.card-price{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--accent);}
+.popular-badge{background:rgba(200,169,110,0.15);color:var(--accent2);border:1px solid rgba(200,169,110,0.25);border-radius:100px;font-size:10px;font-weight:600;padding:3px 9px;letter-spacing:0.3px;}
+.unavail-overlay{position:absolute;inset:0;background:rgba(8,8,8,0.6);display:flex;align-items:center;justify-content:center;border-radius:var(--r-lg);font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.2s ease;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-overlay.open .product-modal{transform:none;}
+.product-modal{background:var(--bg2);border:var(--border2);border-radius:var(--r-xl);width:100%;max-width:420px;overflow:hidden;transform:translateY(20px) scale(0.97);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);}
+.modal-emoji-hdr{background:linear-gradient(135deg,var(--bg3),var(--bg4));padding:36px;text-align:center;position:relative;}
+.modal-emoji-big{font-size:64px;line-height:1;}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;background:var(--bg4);border:var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);transition:color var(--t);}
+.modal-close:hover{color:var(--text);}
+.modal-close svg{width:14px;height:14px;}
+.modal-content{padding:22px;}
+.modal-cat{font-size:11px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:6px;}
+.modal-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.5px;margin-bottom:12px;}
+.modal-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px;}
+.modal-price-row{display:flex;align-items:center;justify-content:space-between;}
+.modal-price{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);letter-spacing:-1px;}
+
+/* LOADING & EMPTY */
+.loading-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:16px;}
+.loading-ring{width:40px;height:40px;border:2px solid var(--bg4);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:13px;color:var(--text3);}
+.empty-state{text-align:center;padding:60px 20px;}
+.empty-emoji{font-size:48px;margin-bottom:12px;}
+.empty-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px;}
+.empty-sub{font-size:13px;color:var(--text2);}
+.no-results{text-align:center;padding:60px 0;color:var(--text2);font-size:14px;}
+.no-results span{display:block;font-size:36px;margin-bottom:12px;}
+
+@media(max-width:600px){
+  .product-grid{grid-template-columns:1fr;}
+  .menu-body{padding:16px 14px 60px;}
+}
+</style>
 </head>
 <body>
 
-<!-- ══════════════ LANDING PAGE ══════════════ -->
+<!-- LANDING -->
 <div id="landing">
-  <div class="landing-glow"></div>
-  <div class="landing-glow-bot"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="landing-logo" id="landingLogo">V</div>
+  <div class="landing-title" id="landingTitle">VELORA</div>
+  <div class="landing-sub">Coffee &amp; Kitchen</div>
 
-  <div class="landing-logo-ring">
-    <span class="landing-logo-letter">V</span>
+  <div class="landing-actions">
+    <button class="action-btn action-menu" onclick="openMenu()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      Menüyü Gör
+    </button>
+    <a class="action-btn action-social action-instagram" href="https://instagram.com/veloracaffe" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+    <a class="action-btn action-social action-facebook" href="https://facebook.com/veloracaffe" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.5c0-.9.3-1.5 1.6-1.5H16.5V4.3C16 4.2 15 4 13.8 4 11.3 4 9.5 5.5 9.5 8.2v2.3H7v3h2.5V21h4z"/></svg>
+      Facebook
+    </a>
   </div>
 
-  <p class="landing-brand">VELORA</p>
-  <p class="landing-sub">Coffee</p>
-
-  <div class="landing-divider">
-    <span></span>
-    <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3.25" stroke="#8A6D30" stroke-width="0.75"/><circle cx="4" cy="4" r="1.25" fill="#8A6D30"/></svg>
-    <span></span>
-  </div>
-
-  <!-- Main option: Menu -->
-  <div class="options-grid">
-
-    <!-- MENU -->
-    <div class="opt-card menu-card" onclick="openMenu()">
-      <div class="opt-icon menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#080808" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="15" y2="18"/></svg>
-      </div>
-      <div class="menu-card-text">
-        <p class="opt-label">Dijital Menü</p>
-        <p class="opt-desc">Tüm içecek ve yiyecekler</p>
-      </div>
-      <div class="arrow-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </div>
-
-    <!-- INSTAGRAM -->
-    <a class="opt-card" href="https://www.instagram.com/velora.coffee" target="_blank" rel="noopener">
-      <div class="opt-icon ig">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.75" stroke-linecap="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <circle cx="12" cy="12" r="4.5"/>
-          <circle cx="17.5" cy="6.5" r="0.5" fill="white" stroke="none"/>
-        </svg>
-      </div>
-      <p class="opt-label">Instagram</p>
-      <p class="opt-desc">@velora.coffee</p>
-    </a>
-
-    <!-- FACEBOOK -->
-    <a class="opt-card" href="https://www.facebook.com/veloracoffee" target="_blank" rel="noopener">
-      <div class="opt-icon fb">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-        </svg>
-      </div>
-      <p class="opt-label">Facebook</p>
-      <p class="opt-desc">VELORA Coffee</p>
-    </a>
-
-    <!-- TIKTOK -->
-    <a class="opt-card" href="https://www.tiktok.com/@velora.coffee" target="_blank" rel="noopener" style="grid-column: 1 / -1;">
-      <div class="opt-icon tt">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.5a8.18 8.18 0 004.78 1.52V6.56a4.85 4.85 0 01-1.01.13z"/>
-        </svg>
-      </div>
-      <p class="opt-label">TikTok</p>
-      <p class="opt-desc">@velora.coffee — Videolar & İçerikler</p>
-    </a>
-
-  </div>
-
-  <div class="landing-footer">VELORA Coffee · İstanbul</div>
+  <div class="landing-tag">Taze · Özenle Hazırlanmış · Her Gün</div>
 </div>
 
-<!-- ══════════════ MENU PAGE ══════════════ -->
+<!-- MENU PAGE -->
 <div id="menu-page">
-
-
-<!-- Header -->
-<header class="header">
-  <button class="back-btn" onclick="closeMenu()" aria-label="Ana sayfaya dön">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-  </button>
-  <div class="logo-ring">
-    <span class="logo-letter">V</span>
+  <div class="menu-header">
+    <div class="header-top">
+      <div class="header-logo">
+        <div class="header-badge" id="headerBadge">V</div>
+        <div class="header-biz" id="headerBiz">VELORA</div>
+      </div>
+      <div class="header-right">
+        <div class="cloud-ind">
+          <div class="cloud-dot" id="cloudDot"></div>
+          <span id="cloudLabel">Yükleniyor</span>
+        </div>
+        <button class="back-btn" onclick="closeMenu()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+          Geri
+        </button>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Menüde ara..." oninput="filterMenu()">
+      </div>
+    </div>
+    <div class="cat-bar" id="catBar"></div>
   </div>
-  <p class="brand-name">VELORA</p>
-  <p class="brand-sub">Coffee</p>
-  <div class="header-divider">
-    <span></span>
-    <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3.25" stroke="#8A6D30" stroke-width="0.75"/><circle cx="4" cy="4" r="1.25" fill="#8A6D30"/></svg>
-    <span></span>
-  </div>
-</header>
-
-<!-- Search -->
-<div class="search-wrap">
-  <div class="search-inner">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5C564E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-    <input type="search" id="searchInput" placeholder="Menüde ara…" autocomplete="off">
-  </div>
-</div>
-
-<!-- Category Nav -->
-<div class="cat-nav-wrap" id="catNav">
-  <nav class="cat-nav" role="navigation" aria-label="Kategoriler">
-    <button class="cat-btn active" data-cat="all">Tümü</button>
-    <button class="cat-btn" data-cat="coffee">Kahve</button>
-    <button class="cat-btn" data-cat="cold">Soğuk İçecek</button>
-    <button class="cat-btn" data-cat="food">Yiyecek</button>
-    <button class="cat-btn" data-cat="dessert">Tatlı</button>
-    <button class="cat-btn" data-cat="extras">Extras</button>
-  </nav>
-</div>
-
-<!-- POPULAR -->
-<section class="section" id="sec-popular" data-cat="all">
-  <div class="section-label">
-    <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-    <h2>Öne Çıkanlar</h2>
-    <span class="line"></span>
-  </div>
-  <div class="featured-scroll">
-
-    <div class="featured-card" onclick="openModal('Caramel Latte','Ev yapımı karamel sos, espresso ve buharda ısıtılmış süt.','☕','155 ₺',['Süt','Kafein'])">
-      <div class="img-wrap">☕<span class="badge-pop">Popüler</span></div>
-      <div class="info">
-        <p class="name">Caramel Latte</p>
-        <p class="desc">Ev yapımı karamel sos ile</p>
-        <p class="price">155 ₺</p>
-      </div>
-    </div>
-
-    <div class="featured-card" onclick="openModal('Avokado Tostu','Ekşi maya ekmek, taze avokado, poşe yumurta, kırmızı biber pulu.','🥑','195 ₺',['Glüten','Yumurta'])">
-      <div class="img-wrap">🥑<span class="badge-pop">Popüler</span></div>
-      <div class="info">
-        <p class="name">Avokado Tostu</p>
-        <p class="desc">Poşe yumurta ile</p>
-        <p class="price">195 ₺</p>
-      </div>
-    </div>
-
-    <div class="featured-card" onclick="openModal('Matcha Latte','Seremoni kalitesi Japon matcha, oat milk ile soğuk ya da sıcak.','🍵','165 ₺',['Süt'])">
-      <div class="img-wrap">🍵<span class="badge-pop">Yeni</span></div>
-      <div class="info">
-        <p class="name">Matcha Latte</p>
-        <p class="desc">Japon sereoni matcha</p>
-        <p class="price">165 ₺</p>
-      </div>
-    </div>
-
-    <div class="featured-card" onclick="openModal('Tiramisu','İtalyan tarifi, mascarpone, Kahve kreması, kakao tozu.','🍰','175 ₺',['Süt','Yumurta','Glüten'])">
-      <div class="img-wrap">🍰</div>
-      <div class="info">
-        <p class="name">Tiramisu</p>
-        <p class="desc">Ev yapımı, günlük taze</p>
-        <p class="price">175 ₺</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- COFFEE -->
-<section class="section" id="sec-coffee" data-cat="coffee">
-  <div class="section-label">
-    <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 8h1a4 4 0 010 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
-    <h2>Kahve</h2>
-    <span class="line"></span>
-  </div>
-  <div class="item-list" id="list-coffee">
-
-    <div class="item" data-name="Espresso" onclick="openModal('Espresso','Tek ya da çift shot, yoğun aromada İtalyan kavurma.','☕','85 ₺',['Kafein'])">
-      <div class="item-emoji">☕</div>
-      <div class="item-info">
-        <p class="item-name">Espresso</p>
-        <p class="item-desc">Tek / Çift shot — İtalyan kavurma</p>
-      </div>
-      <div class="item-right"><span class="item-price">85 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Americano" onclick="openModal('Americano','Espresso üzerine sıcak su, temiz ve derin bir tat.','☕','95 ₺',['Kafein'])">
-      <div class="item-emoji">☕</div>
-      <div class="item-info">
-        <p class="item-name">Americano</p>
-        <p class="item-desc">Espresso + sıcak su</p>
-      </div>
-      <div class="item-right"><span class="item-price">95 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Flat White" onclick="openModal('Flat White','Çift ristretto, az köpüklü mikro-buhar süt. Yoğun ama dengeli.','☕','120 ₺',['Süt','Kafein'])">
-      <div class="item-emoji">☕</div>
-      <div class="item-info">
-        <p class="item-name">Flat White</p>
-        <p class="item-desc">Çift ristretto, mikro-buhar süt</p>
-      </div>
-      <div class="item-right"><span class="item-price">120 ₺</span><span class="badge-new">Tercih</span></div>
-    </div>
-
-    <div class="item" data-name="Cappuccino" onclick="openModal('Cappuccino','Espresso, buharlı süt ve kadifemsi köpük — klasik denge.','☕','115 ₺',['Süt','Kafein'])">
-      <div class="item-emoji">☕</div>
-      <div class="item-info">
-        <p class="item-name">Cappuccino</p>
-        <p class="item-desc">Espresso, buharlı süt, köpük</p>
-      </div>
-      <div class="item-right"><span class="item-price">115 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Caramel Latte" onclick="openModal('Caramel Latte','Ev yapımı karamel sos, espresso ve buharda ısıtılmış süt.','☕','155 ₺',['Süt','Kafein'])">
-      <div class="item-emoji">☕</div>
-      <div class="item-info">
-        <p class="item-name">Caramel Latte</p>
-        <p class="item-desc">Ev yapımı karamel sos</p>
-      </div>
-      <div class="item-right"><span class="item-price">155 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Türk Kahvesi" onclick="openModal('Türk Kahvesi','Geleneksel kum potasında pişirilmiş, yanında lokum ile.','☕','110 ₺',['Kafein'])">
-      <div class="item-emoji">☕</div>
-      <div class="item-info">
-        <p class="item-name">Türk Kahvesi</p>
-        <p class="item-desc">Kum potası, lokum eşliğinde</p>
-      </div>
-      <div class="item-right"><span class="item-price">110 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Cortado" onclick="openModal('Cortado','Eşit oranda espresso ve sütlü buhar — küçük ama güçlü.','☕','105 ₺',['Süt','Kafein'])">
-      <div class="item-emoji">☕</div>
-      <div class="item-info">
-        <p class="item-name">Cortado</p>
-        <p class="item-desc">Espresso + az sıcak süt</p>
-      </div>
-      <div class="item-right"><span class="item-price">105 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Matcha Latte" onclick="openModal('Matcha Latte','Seremoni kalitesi Japon matcha, oat milk ile soğuk ya da sıcak.','🍵','165 ₺',['Süt'])">
-      <div class="item-emoji">🍵</div>
-      <div class="item-info">
-        <p class="item-name">Matcha Latte</p>
-        <p class="item-desc">Japon sereoni matcha, oat milk</p>
-      </div>
-      <div class="item-right"><span class="item-price">165 ₺</span><span class="badge-new">Yeni</span></div>
-    </div>
-
-  </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- COLD DRINKS -->
-<section class="section" id="sec-cold" data-cat="cold">
-  <div class="section-label">
-    <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 2h8l1 7H7L8 2z"/><path d="M7 9c0 7 1 11 5 11s5-4 5-11"/><line x1="12" y1="9" x2="12" y2="20"/></svg>
-    <h2>Soğuk İçecekler</h2>
-    <span class="line"></span>
-  </div>
-  <div class="item-list" id="list-cold">
-
-    <div class="item" data-name="Cold Brew" onclick="openModal('Cold Brew','18 saat soğuk demleme, pürüzsüz ve asitsiz bir deneyim.','🧋','135 ₺',['Kafein'])">
-      <div class="item-emoji">🧋</div>
-      <div class="item-info">
-        <p class="item-name">Cold Brew</p>
-        <p class="item-desc">18 saat soğuk demleme</p>
-      </div>
-      <div class="item-right"><span class="item-price">135 ₺</span><span class="badge-new">İmza</span></div>
-    </div>
-
-    <div class="item" data-name="Iced Latte" onclick="openModal('Iced Latte','Espresso, soğuk süt ve buz — yaz klasiği.','☕','130 ₺',['Süt','Kafein'])">
-      <div class="item-emoji">☕</div>
-      <div class="item-info">
-        <p class="item-name">Iced Latte</p>
-        <p class="item-desc">Espresso + soğuk süt + buz</p>
-      </div>
-      <div class="item-right"><span class="item-price">130 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Iced Matcha" onclick="openModal('Iced Matcha','Soğuk oat milk üzerine dökülen matcha — canlandırıcı.','🍵','155 ₺',['Süt'])">
-      <div class="item-emoji">🍵</div>
-      <div class="item-info">
-        <p class="item-name">Iced Matcha</p>
-        <p class="item-desc">Oat milk, buz üzeri matcha</p>
-      </div>
-      <div class="item-right"><span class="item-price">155 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Limonata" onclick="openModal('Limonata','Taze sıkım limon, doğal şeker şurubu ve maden suyu.','🍋','95 ₺',[])">
-      <div class="item-emoji">🍋</div>
-      <div class="item-info">
-        <p class="item-name">Limonata</p>
-        <p class="item-desc">Taze sıkım, doğal şurup</p>
-      </div>
-      <div class="item-right"><span class="item-price">95 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Sparkling Water" onclick="openModal('Maden Suyu','Doğal kaynak maden suyu, 330 ml.','💧','55 ₺',[])">
-      <div class="item-emoji">💧</div>
-      <div class="item-info">
-        <p class="item-name">Maden Suyu</p>
-        <p class="item-desc">330 ml — doğal kaynak</p>
-      </div>
-      <div class="item-right"><span class="item-price">55 ₺</span></div>
-    </div>
-
-  </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- FOOD -->
-<section class="section" id="sec-food" data-cat="food">
-  <div class="section-label">
-    <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 00-5 5v6h4l1 8H17"/></svg>
-    <h2>Yiyecek</h2>
-    <span class="line"></span>
-  </div>
-  <div class="item-list" id="list-food">
-
-    <div class="item" data-name="Avokado Tostu" onclick="openModal('Avokado Tostu','Ekşi maya ekmek, taze avokado, poşe yumurta, kırmızı biber pulu.','🥑','195 ₺',['Glüten','Yumurta'])">
-      <div class="item-emoji">🥑</div>
-      <div class="item-info">
-        <p class="item-name">Avokado Tostu</p>
-        <p class="item-desc">Ekşi maya, poşe yumurta</p>
-      </div>
-      <div class="item-right"><span class="item-price">195 ₺</span><span class="badge-new">Popüler</span></div>
-    </div>
-
-    <div class="item" data-name="Kahvaltı Tabağı" onclick="openModal('Kahvaltı Tabağı','Peynir çeşitleri, zeytin, domates, salatalık, yumurta ve ekmek sepeti.','🍳','285 ₺',['Glüten','Süt','Yumurta'])">
-      <div class="item-emoji">🍳</div>
-      <div class="item-info">
-        <p class="item-name">Kahvaltı Tabağı</p>
-        <p class="item-desc">Peynir, zeytin, yumurta + ekmek</p>
-      </div>
-      <div class="item-right"><span class="item-price">285 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Kruvasan" onclick="openModal('Kruvasan','Tereyağlı Fransız kruvasan, sade ya da peynirli.','🥐','120 ₺',['Glüten','Süt'])">
-      <div class="item-emoji">🥐</div>
-      <div class="item-info">
-        <p class="item-name">Kruvasan</p>
-        <p class="item-desc">Tereyağlı Fransız, sade / peynirli</p>
-      </div>
-      <div class="item-right"><span class="item-price">120 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Sandviç" onclick="openModal('Club Sandviç','Köy ekmeği, ızgara tavuk, marul, domates, özel sos.','🥪','235 ₺',['Glüten'])">
-      <div class="item-emoji">🥪</div>
-      <div class="item-info">
-        <p class="item-name">Club Sandviç</p>
-        <p class="item-desc">Köy ekmeği, ızgara tavuk</p>
-      </div>
-      <div class="item-right"><span class="item-price">235 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Açık Omlet" onclick="openModal('Açık Omlet','3 yumurta, karamelize soğan, mantarlı, parmesan rende.','🍳','210 ₺',['Yumurta','Süt'])">
-      <div class="item-emoji">🍳</div>
-      <div class="item-info">
-        <p class="item-name">Açık Omlet</p>
-        <p class="item-desc">Mantarlı, karamelize soğan</p>
-      </div>
-      <div class="item-right"><span class="item-price">210 ₺</span></div>
-    </div>
-
-  </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- DESSERT -->
-<section class="section" id="sec-dessert" data-cat="dessert">
-  <div class="section-label">
-    <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-8a2 2 0 00-2-2H6a2 2 0 00-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2 1 2 1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/></svg>
-    <h2>Tatlı</h2>
-    <span class="line"></span>
-  </div>
-  <div class="item-list" id="list-dessert">
-
-    <div class="item" data-name="Tiramisu" onclick="openModal('Tiramisu','İtalyan tarifi, mascarpone, kahve kreması, taze kakao tozu.','🍰','175 ₺',['Süt','Yumurta','Glüten'])">
-      <div class="item-emoji">🍰</div>
-      <div class="item-info">
-        <p class="item-name">Tiramisu</p>
-        <p class="item-desc">Ev yapımı, günlük taze</p>
-      </div>
-      <div class="item-right"><span class="item-price">175 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Cheesecake" onclick="openModal('New York Cheesecake','Kremsi New York usulü, taze çilek sos ile servis edilir.','🍮','165 ₺',['Süt','Yumurta','Glüten'])">
-      <div class="item-emoji">🍮</div>
-      <div class="item-info">
-        <p class="item-name">New York Cheesecake</p>
-        <p class="item-desc">Taze çilek sos, günlük taze</p>
-      </div>
-      <div class="item-right"><span class="item-price">165 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Brownie" onclick="openModal('Çikolatalı Brownie','Isıtılmış servis, bitter çikolata, yanında vanilyalı dondurma.','🍫','155 ₺',['Glüten','Süt','Yumurta'])">
-      <div class="item-emoji">🍫</div>
-      <div class="item-info">
-        <p class="item-name">Çikolatalı Brownie</p>
-        <p class="item-desc">Vanilyalı dondurma ile ısıtılmış</p>
-      </div>
-      <div class="item-right"><span class="item-price">155 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Cookie" onclick="openModal('Fırın Cookie','Günlük fırınlanmış, bitter çikolatalı kurabiye.','🍪','85 ₺',['Glüten','Süt'])">
-      <div class="item-emoji">🍪</div>
-      <div class="item-info">
-        <p class="item-name">Fırın Cookie</p>
-        <p class="item-desc">Günlük fırın, bitter çikolatalı</p>
-      </div>
-      <div class="item-right"><span class="item-price">85 ₺</span></div>
-    </div>
-
-  </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- EXTRAS -->
-<section class="section" id="sec-extras" data-cat="extras">
-  <div class="section-label">
-    <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <h2>Extras</h2>
-    <span class="line"></span>
-  </div>
-  <div class="item-list" id="list-extras">
-
-    <div class="item" data-name="Oat Milk" onclick="openModal('Yulaf Sütü','Herhangi bir içeceğe yulaf sütü alternatifi.','🌾','20 ₺',[])">
-      <div class="item-emoji">🌾</div>
-      <div class="item-info">
-        <p class="item-name">Yulaf Sütü (Oat Milk)</p>
-        <p class="item-desc">Herhangi bir içeceğe eklenebilir</p>
-      </div>
-      <div class="item-right"><span class="item-price">+20 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Extra Shot" onclick="openModal('Extra Espresso Shot','İçeceğinize ekstra espresso shot.','☕','25 ₺',['Kafein'])">
-      <div class="item-emoji">☕</div>
-      <div class="item-info">
-        <p class="item-name">Extra Espresso Shot</p>
-        <p class="item-desc">Herhangi bir içeceğe eklenebilir</p>
-      </div>
-      <div class="item-right"><span class="item-price">+25 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Karamel Sos" onclick="openModal('Karamel Sos','Ev yapımı tuzlu karamel sos.','🍯','15 ₺',[])">
-      <div class="item-emoji">🍯</div>
-      <div class="item-info">
-        <p class="item-name">Karamel Sos</p>
-        <p class="item-desc">Ev yapımı tuzlu karamel</p>
-      </div>
-      <div class="item-right"><span class="item-price">+15 ₺</span></div>
-    </div>
-
-    <div class="item" data-name="Şurup" onclick="openModal('Şurup','Vanilya, fındık ya da karamel şurubu seçeneği.','💛','15 ₺',[])">
-      <div class="item-emoji">💛</div>
-      <div class="item-info">
-        <p class="item-name">Şurup</p>
-        <p class="item-desc">Vanilya / fındık / karamel</p>
-      </div>
-      <div class="item-right"><span class="item-price">+15 ₺</span></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-  <p class="footer-brand">Velora Coffee</p>
-  <p class="footer-info">Sipariş vermek için lütfen garsonumuza başvurun.<br>Alerjen bilgisi için ürüne dokunun.</p>
-  <div class="footer-divider"></div>
-  <p class="footer-tag">Fiyatlara KDV dahildir • %8 KDV</p>
-</footer>
-
-<!-- Item Modal -->
-<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
-  <div class="modal" id="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-emoji" id="modalEmoji">☕</div>
-    <h2 class="modal-name" id="modalName">—</h2>
-    <p class="modal-desc" id="modalDesc">—</p>
-    <div class="tags" id="modalTags"></div>
-    <div class="modal-footer">
-      <span class="modal-price" id="modalPrice">—</span>
-      <button class="modal-close" onclick="closeModal()">Kapat</button>
+  <div class="menu-body" id="menuBody">
+    <div class="loading-screen">
+      <div class="loading-ring"></div>
+      <div class="loading-text">Menü yükleniyor...</div>
     </div>
   </div>
 </div>
 
-
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal" onclick="handleOverlayClick(event)">
+  <div class="product-modal">
+    <div class="modal-emoji-hdr">
+      <div class="modal-emoji-big" id="modalEmoji">☕</div>
+      <button class="modal-close" onclick="closeProductModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-content">
+      <div class="modal-cat" id="modalCat">Kategori</div>
+      <div class="modal-name" id="modalName">Ürün</div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-price-row">
+        <div class="modal-price" id="modalPrice">0 ₺</div>
+        <div id="modalPopular"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
 
-<script src="script.js"></script>
+<script>
+"use strict";
+
+/* ══ FIREBASE CONFIG ══════════════════════════
+   POS ile aynı Firebase projesini kullanın.
+   Burası otomatik olarak menü değişikliklerini yansıtır.
+═════════════════════════════════════════════ */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyC6MaQnrlBuINhqowrcxQ1IfSQwtp7PqnQ",
+  authDomain: "veloracaffe2.firebaseapp.com",
+  projectId: "veloracaffe2",
+  storageBucket: "veloracaffe2.firebasestorage.app",
+  messagingSenderId: "196549083369",
+  appId: "1:196549083369:web:f9d6c12a89dc871f667078"
+};
+
+let allProducts = [];
+let bizName     = "VELORA";
+let activeCat   = "Tümü";
+let isMenuOpen  = false;
+
+/* ══ FIREBASE ═══════════════════════════════ */
+function initFirebase(){
+  try{
+    if(!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+    const db  = firebase.firestore();
+    const doc = db.collection("aura_pos").doc("shared_state");
+
+    doc.onSnapshot(snap=>{
+      const data = snap.exists?(snap.data()||{}):{};
+
+      // Sadece satışta olanları göster
+      const menu = data["aura_menu"]||[];
+      allProducts = menu.filter(p=>p.available!==false);
+
+      // İşletme adı
+      const settings = data["aura_settings"]||{};
+      if(settings.bizName){ bizName=settings.bizName; updateBizName(); }
+
+      setCloudStatus("live");
+      if(isMenuOpen) renderMenu();
+    },err=>{
+      console.error("Firestore:",err);
+      setCloudStatus("offline");
+      loadDemo();
+    });
+  }catch(e){
+    console.error("Firebase:",e);
+    setCloudStatus("offline");
+    loadDemo();
+  }
+}
+
+function loadDemo(){
+  allProducts=[
+    {id:1, cat:"Espresso Bazlı",emoji:"☕",name:"Espresso",    price:65, desc:"Yoğun, saf espresso",         popular:false,available:true},
+    {id:2, cat:"Espresso Bazlı",emoji:"🖤",name:"Americano",   price:75, desc:"Espresso + sıcak su",          popular:true, available:true},
+    {id:3, cat:"Espresso Bazlı",emoji:"🤍",name:"Cappuccino",  price:95, desc:"Espresso + köpüklü süt",       popular:true, available:true},
+    {id:10,cat:"Soğuk Kahve",   emoji:"🧊",name:"Cold Brew",   price:115,desc:"18 saat demleme, yumuşak",     popular:true, available:true},
+    {id:11,cat:"Soğuk Kahve",   emoji:"🥤",name:"Iced Latte",  price:110,desc:"Espresso + soğuk süt + buz",   popular:true, available:true},
+    {id:31,cat:"Atıştırmalık",  emoji:"🥐",name:"Croissant",   price:90, desc:"Tereyağlı, çıtır Fransız",      popular:true, available:true},
+    {id:35,cat:"Atıştırmalık",  emoji:"🍰",name:"Cheesecake",  price:148,desc:"New York tarzı dilim",           popular:true, available:true},
+  ];
+  if(isMenuOpen) renderMenu();
+}
+
+/* ══ UI HELPERS ═════════════════════════════ */
+function setCloudStatus(s){
+  const dot=document.getElementById("cloudDot");
+  const lbl=document.getElementById("cloudLabel");
+  if(!dot)return;
+  dot.className="cloud-dot"+(s==="live"?" live":"");
+  lbl.textContent=s==="live"?"Canlı":"Çevrimdışı";
+}
+
+function updateBizName(){
+  document.getElementById("headerBiz").textContent=bizName;
+  document.getElementById("landingTitle").textContent=bizName;
+  document.getElementById("headerBadge").textContent=bizName[0]?.toUpperCase()||"V";
+  document.getElementById("landingLogo").textContent=bizName[0]?.toUpperCase()||"V";
+}
+
+function fmt(n){ return (Number(n)||0).toLocaleString("tr-TR",{minimumFractionDigits:0,maximumFractionDigits:0})+" ₺"; }
+
+/* ══ LANDING ════════════════════════════════ */
+function openMenu(){
+  const landing=document.getElementById("landing");
+  const page=document.getElementById("menu-page");
+  landing.classList.add("exit");
+  setTimeout(()=>{
+    landing.style.display="none";
+    page.classList.add("visible");
+    isMenuOpen=true;
+    renderMenu();
+    window.scrollTo(0,0);
+  },450);
+}
+
+function closeMenu(){
+  const landing=document.getElementById("landing");
+  const page=document.getElementById("menu-page");
+  page.classList.remove("visible");
+  landing.style.display="";
+  landing.classList.remove("exit");
+  void landing.offsetWidth;
+  landing.style.animation="none";
+  requestAnimationFrame(()=>landing.style.animation="");
+  isMenuOpen=false;
+  window.scrollTo(0,0);
+}
+
+/* ══ CATEGORY BAR ═══════════════════════════ */
+function buildCatBar(categories){
+  const bar=document.getElementById("catBar");
+  const cats=["Tümü",...categories];
+  bar.innerHTML=cats.map(c=>`
+    <button class="cat-pill${c===activeCat?" active":""}"
+      onclick="selectCat('${c.replace(/'/g,"\\'")}')">
+      ${c}
+    </button>`).join("");
+}
+
+function selectCat(cat){
+  activeCat=cat;
+  document.getElementById("searchInput").value="";
+  renderMenu();
+  if(cat!=="Tümü"){
+    const s=document.getElementById("sec-"+cat.replace(/\s/g,"_"));
+    if(s) setTimeout(()=>s.scrollIntoView({behavior:"smooth",block:"start"}),50);
+  }else{
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+}
+
+/* ══ RENDER MENU ════════════════════════════ */
+function renderMenu(){
+  const body=document.getElementById("menuBody");
+  const q=(document.getElementById("searchInput")?.value||"").toLowerCase().trim();
+
+  let products=allProducts;
+  if(q) products=allProducts.filter(p=>
+    p.name.toLowerCase().includes(q)||
+    (p.desc||"").toLowerCase().includes(q)||
+    (p.cat||"").toLowerCase().includes(q)
+  );
+
+  if(products.length===0){
+    body.innerHTML=`<div class="empty-state">
+      <div class="empty-emoji">${q?"🔍":"☕"}</div>
+      <div class="empty-title">${q?"Sonuç bulunamadı":"Menü boş"}</div>
+      <div class="empty-sub">${q?'"'+q+'" için ürün bulunamadı.':"Yakında yeni ürünler eklenecek."}</div>
+    </div>`;
+    buildCatBar([...new Set(allProducts.map(p=>p.cat))]);
+    return;
+  }
+
+  const allCats=[...new Set(allProducts.map(p=>p.cat))];
+  buildCatBar(allCats);
+
+  const productCats=[...new Set(products.map(p=>p.cat))];
+  const visibleCats=activeCat==="Tümü"||q?productCats:productCats.filter(c=>c===activeCat);
+
+  if(visibleCats.length===0){
+    body.innerHTML=`<div class="no-results"><span>🔍</span>Bu kategoride ürün yok.</div>`;
+    return;
+  }
+
+  body.innerHTML=visibleCats.map(cat=>{
+    const items=products.filter(p=>p.cat===cat);
+    const safeId="sec-"+cat.replace(/\s/g,"_");
+    return `<div class="cat-section" id="${safeId}">
+      <div class="cat-title">${cat}</div>
+      <div class="product-grid">
+        ${items.map(p=>productCard(p)).join("")}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function productCard(p){
+  return `<div class="product-card" onclick="openProductModal(${p.id})">
+    <div class="card-top">
+      <div class="card-emoji">${p.emoji||"☕"}</div>
+      <div class="card-info">
+        <div class="card-name">${p.name}</div>
+        ${p.desc?`<div class="card-desc">${p.desc}</div>`:""}
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-price">${fmt(p.price)}</div>
+      ${p.popular?'<span class="popular-badge">⭐ Popüler</span>':""}
+    </div>
+  </div>`;
+}
+
+/* ══ SEARCH ═════════════════════════════════ */
+function filterMenu(){
+  activeCat="Tümü";
+  renderMenu();
+}
+
+/* ══ PRODUCT MODAL ══════════════════════════ */
+function openProductModal(id){
+  const p=allProducts.find(x=>x.id===id);
+  if(!p)return;
+  document.getElementById("modalEmoji").textContent=p.emoji||"☕";
+  document.getElementById("modalName").textContent=p.name;
+  document.getElementById("modalCat").textContent=p.cat;
+  document.getElementById("modalDesc").textContent=p.desc||"Açıklama mevcut değil.";
+  document.getElementById("modalPrice").textContent=fmt(p.price);
+  document.getElementById("modalPopular").innerHTML=p.popular?'<span class="popular-badge">⭐ Popüler</span>':"";
+  document.getElementById("productModal").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeProductModal(){
+  document.getElementById("productModal").classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function handleOverlayClick(e){
+  if(e.target===document.getElementById("productModal")) closeProductModal();
+}
+
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeProductModal(); });
+
+/* ══ INIT ═══════════════════════════════════ */
+document.addEventListener("DOMContentLoaded",()=>{ initFirebase(); });
+</script>
 </body>
 </html>
